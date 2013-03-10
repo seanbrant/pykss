@@ -4,6 +4,6 @@ python:
   - "2.7"
   - "pypy"
 install:
-  - pip install -e .
+  - make develop
 script:
   - make test
