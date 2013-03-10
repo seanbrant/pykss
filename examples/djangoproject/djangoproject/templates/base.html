@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+        <title>Styleguide Example</title>
+        <link rel="stylesheet" href="{% static "css/layout.css" %}" type="text/css" />
+        <link rel="stylesheet" href="{% static "css/buttons.css" %}" type="text/css" />
+    </head>
+    <body>
+        <header>Styleguide Example</header>
+        <div id="wrapper">
+            <nav role="main">
+                <ul>
+                    <li><a href="{% url "index" %}">Home</a></li>
+                    <li><a href="{% url "styleguide" %}">Styleguide</a></li>
+                </ul>
+            </nav>
+            {% block content %}{% endblock %}
+        </div>
+        <script src="{% static "pykss/js/kss.js" %}"></script>
+    </body>
+</html>

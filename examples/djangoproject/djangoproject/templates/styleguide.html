@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load pykss %}
+
+{% block content %}
+{% styleguideblock styleguide "1.1" %}
+    <button class="{{ modifier.class_name }}">Example Button</button>
+{% endstyleguideblock %}
+
+{% verbatim %}
+<p>This block above was created with a simple template call:</p>
+<pre>
+    <code>
+{% styleguideblock styleguide "1.1" %}
+    &lt;button class="{{ modifier.class_name }}"&gt;Example Button&lt;/button&gt;
+{% endstyleguideblock %}
+    </code>
+</pre>
+{% endverbatim %}
+{% endblock %}

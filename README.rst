@@ -50,3 +50,10 @@ Usage
     >>>
     >>> styleguide.section('2.1.1').modifiers[0].description
     'Subtle hover highlight'
+
+
+Django Usage
+------------
+If you would like to use KSS within a Django project `pykss.contrib.django`
+provides a view and template tag to make it easier. Check out the example
+Django project for usage.
