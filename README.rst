@@ -1,6 +1,10 @@
 PyKSS - Knyle Style Sheets
 ==========================
 
+.. image:: https://secure.travis-ci.org/seanbrant/pykss.png?branch=master
+   :target: http://travis-ci.org/seanbrant/pykss
+
+
 PyKSS is a Python implementation of KSS_. KSS attempts to provide a
 methodology for writing maintainable, documented CSS within a team.
 
