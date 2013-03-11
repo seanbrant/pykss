@@ -11,7 +11,7 @@ from pykss.exceptions import SectionDoesNotExist
 from pykss.parser import Parser
 
 
-class StyleGuideBlockTestCase(TestCase):
+class StyleguideBlockTestCase(TestCase):
 
     def setUp(self):
         css = os.path.join(settings.PROJECT_ROOT, 'tests', 'fixtures', 'css')

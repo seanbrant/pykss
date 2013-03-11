@@ -4,7 +4,7 @@ from django.views.generic.base import ContextMixin, TemplateView
 import pykss
 
 
-class StyleGuideMixin(ContextMixin):
+class StyleguideMixin(ContextMixin):
 
     def get_styleguide(self):
         dirs = getattr(settings, 'PYKSS_DIRS', [])
@@ -13,8 +13,8 @@ class StyleGuideMixin(ContextMixin):
     def get_context_data(self, **kwargs):
         context = {'styleguide': self.get_styleguide()}
         context.update(kwargs)
-        return super(StyleGuideMixin, self).get_context_data(**context)
+        return super(StyleguideMixin, self).get_context_data(**context)
 
 
-class StyleGuideView(StyleGuideMixin, TemplateView):
+class StyleguideView(StyleguideMixin, TemplateView):
     pass

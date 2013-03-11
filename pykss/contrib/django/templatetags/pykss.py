@@ -8,7 +8,7 @@ from django.utils.html import escape
 register = template.Library()
 
 
-class StyleGuideBlockNode(template.Node):
+class StyleguideBlockNode(template.Node):
 
     def __init__(self, styleguide, reference, template_name, nodelist):
         self.styleguide = styleguide
@@ -17,7 +17,7 @@ class StyleGuideBlockNode(template.Node):
         self.nodelist = nodelist
 
     def __repr__(self):
-        return '<StyleGuideBlockNode>'
+        return '<StyleguideBlockNode>'
 
     def render(self, context):
         styleguide = self.styleguide.resolve(context)
@@ -88,7 +88,7 @@ def styleguideblock(parser, token):
     nodelist = parser.parse(('endstyleguideblock',))
     parser.delete_first_token()
 
-    return StyleGuideBlockNode(
+    return StyleguideBlockNode(
         styleguide=parser.compile_filter(styleguide),
         reference=parser.compile_filter(reference),
         template_name=parser.compile_filter(template_name),
