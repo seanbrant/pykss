@@ -1,5 +1,5 @@
 develop:
-	pip install "file://`pwd`#egg=sentry[tests]"
+	pip install "file://`pwd`#egg=pykss[tests]"
 	pip install -e . --use-mirrors
 
 lint:
