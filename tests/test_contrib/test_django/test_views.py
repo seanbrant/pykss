@@ -3,7 +3,7 @@ import os
 from django.conf import settings
 from django.test import TestCase
 
-from pykss.contrib.django.views import StyleguideMixin
+from pykss.contrib.django.views import StyleguideMixin, StyleguideView
 
 
 class StyleguideMixinTestCase(TestCase):
@@ -15,4 +15,4 @@ class StyleguideMixinTestCase(TestCase):
             self.assertEqual(styleguide.section('2.1.1').description, 'Your standard form button.')
 
     def test_get_context_data_adds_sytleguide_to_context(self):
-        self.assertIn('styleguide', StyleguideMixin().get_context_data())
+        self.assertIn('styleguide', StyleguideView().get_context_data())

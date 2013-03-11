@@ -1,10 +1,10 @@
 from django.conf import settings
-from django.views.generic.base import ContextMixin, TemplateView
+from django.views.generic.base import TemplateView
 
 import pykss
 
 
-class StyleguideMixin(ContextMixin):
+class StyleguideMixin(object):
 
     def get_styleguide(self):
         dirs = getattr(settings, 'PYKSS_DIRS', [])
