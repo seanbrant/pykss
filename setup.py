@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pykss',
-    version='0.2.1',
+    version='0.2.2',
     description='Python implementation of KSS',
     long_description=open('README.rst').read(),
     author='Sean Brant',
