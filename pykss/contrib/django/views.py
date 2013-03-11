@@ -11,9 +11,9 @@ class StyleguideMixin(object):
         return pykss.Parser(*dirs)
 
     def get_context_data(self, **kwargs):
-        context = {'styleguide': self.get_styleguide()}
-        context.update(kwargs)
-        return super(StyleguideMixin, self).get_context_data(**context)
+        context = super(StyleguideMixin, self).get_context_data(**kwargs)
+        context.update({'styleguide': self.get_styleguide()})
+        return context
 
 
 class StyleguideView(StyleguideMixin, TemplateView):
