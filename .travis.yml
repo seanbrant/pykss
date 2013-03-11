@@ -3,7 +3,12 @@ python:
   - "2.6"
   - "2.7"
   - "pypy"
+env:
+  - DJANGO=Django==1.5.0
+  - DJANGO=Django==1.4.5
+  - DJANGO="-e git+git://github.com/django/django.git#egg=Django"
 install:
+  - pip install $DJANGO --use-mirrors
   - make develop
 script:
   - make test
