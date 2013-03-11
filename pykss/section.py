@@ -14,7 +14,7 @@ reference_re = re.compile('%s ([\d\.]+)' % REFERENCE_START)
 class Section(object):
 
     def __init__(self, comment=None, filename=None):
-        self.comment = comment
+        self.comment = comment or ''
         self.filename = filename
 
     def parse(self):

@@ -23,5 +23,12 @@ setup(
     ],
     zip_safe=False,
     test_suite='runtests.runtests',
-    extras_require={'tests': ['pytest', 'flake8']},
+    extras_require={
+        'tests': [
+            'Django>=1.5',
+            'flake8',
+            'mock',
+            'pytest',
+        ],
+    },
 )

@@ -1,5 +1,8 @@
 from django import template
+from django.conf import settings
 from django.template.loader import render_to_string
+from django.utils.safestring import mark_safe
+from django.utils.html import escape
 
 
 register = template.Library()
@@ -21,22 +24,29 @@ class StyleGuideBlockNode(template.Node):
         reference = self.reference.resolve(context)
         template_name = self.template_name.resolve(context)
 
-        section = styleguide.section(reference)
+        try:
+            section = styleguide.section(reference)
+        except Exception as e:
+            if settings.TEMPLATE_DEBUG:
+                raise e
+            return ''
 
-        example_html = self.nodelist.render(context)
+        example_html = self.nodelist.render(context).strip()
 
         modifier_examples = []
         for modifier in section.modifiers:
             context.update({'modifier': modifier})
+            html = self.nodelist.render(context).strip()
             modifier_examples.append({
                 'modifier': modifier,
-                'html': self.nodelist.render(context),
+                'html': mark_safe(html),
             })
 
         output = render_to_string(template_name, {
             'section': section,
-            'example_html': example_html,
+            'example_html': mark_safe(example_html),
             'modifier_examples': modifier_examples,
+            "escaped_html": escape(example_html),
         })
 
         return output
@@ -44,16 +54,36 @@ class StyleGuideBlockNode(template.Node):
 
 @register.tag
 def styleguideblock(parser, token):
-    bits = token.contents.split()
+    """
+    {% styleguideblock styleguide "1.1" %}
+        <button class="{{ modifier.class_name }}">Example Button</button>
+    {% endstyleguideblock %}
 
-    if len(bits) != 3:
-        raise template.TemplateSyntaxError("styleguideblock expected at least two arguments")
+    {% styleguideblock styleguide "1.1" using "custom.html" %}
+        <button class="{{ modifier.class_name }}">Example Button</button>
+    {% endstyleguideblock %}
 
-    try:
-        tag, styleguide, reference, template_name = bits
-    except ValueError:
-        tag, styleguide, reference = bits
+    """
+    bits = token.split_contents()[1:]
+
+    if len(bits) < 2:
+        raise template.TemplateSyntaxError("styleguideblock expected at "
+            "least two arguments")
+
+    elif len(bits) == 2:
+        styleguide, reference = bits
         template_name = '"pykss/styleguideblock.html"'
+
+    elif len(bits) >= 3 and bits[2] != 'using':
+        raise template.TemplateSyntaxError("styleguideblock expected using "
+            "as the third argument")
+
+    elif len(bits) == 3:
+        raise template.TemplateSyntaxError("styleguideblock expects a "
+            "template name after 'using'")
+
+    else:
+        styleguide, reference, _using, template_name = bits
 
     nodelist = parser.parse(('endstyleguideblock',))
     parser.delete_first_token()

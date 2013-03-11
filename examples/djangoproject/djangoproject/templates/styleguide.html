@@ -2,6 +2,17 @@
 {% load pykss %}
 
 {% block content %}
+{% comment %}
+
+{% styleguideblock styleguide "1.1" %}
+...
+{% endstyleguideblock %}
+
+{% styleguideblock styleguide "1.1" using "custom.html" %}
+...
+{% endstyleguideblock %}
+
+{% endcomment %}
 {% styleguideblock styleguide "1.1" %}
     <button class="{{ modifier.class_name }}">Example Button</button>
 {% endstyleguideblock %}

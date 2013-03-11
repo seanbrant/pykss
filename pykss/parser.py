@@ -1,6 +1,7 @@
 import os
 
 from pykss.comment import CommentParser
+from pykss.exceptions import SectionDoesNotExist
 from pykss.section import Section
 
 
@@ -33,4 +34,7 @@ class Parser(object):
         return self._sections
 
     def section(self, reference):
-        return self.sections.get(reference, Section())
+        try:
+            return self.sections[reference]
+        except KeyError:
+            raise SectionDoesNotExist('Section "%s" does not exist.' % reference)
