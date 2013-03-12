@@ -1,1 +1,4 @@
 include README.rst
+
+recursive-include pykss/contrib/django/templates *
+recursive-include pykss/contrib/django/static *
