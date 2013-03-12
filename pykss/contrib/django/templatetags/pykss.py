@@ -35,19 +35,25 @@ class StyleguideBlockNode(template.Node):
 
         modifier_examples = []
         for modifier in section.modifiers:
-            context.update({'modifier_class': ' %s' % modifier.class_name})
-            html = self.nodelist.render(context).strip()
+            modifier_context = template.Context({
+                'modifier_class': ' %s' % modifier.class_name,
+            })
+            html = self.nodelist.render(modifier_context).strip()
             modifier_examples.append({
                 'modifier': modifier,
                 'html': mark_safe(html),
             })
 
-        output = render_to_string(template_name, {
+        context.update({
             'section': section,
             'example_html': mark_safe(example_html),
             'modifier_examples': modifier_examples,
-            "escaped_html": escape(example_html),
+            'escaped_html': escape(example_html),
         })
+
+        output = render_to_string(template_name, context)
+
+        context.pop()
 
         return output
 
