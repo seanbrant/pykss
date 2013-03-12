@@ -15,7 +15,7 @@ class Parser(object):
 
         filenames = [os.path.join(subpath, filename)
             for path in self.paths
-            for subpath, dris, files in os.walk(path)
+            for subpath, dirs, files in os.walk(path)
             for filename in files]
 
         for filename in filenames:
