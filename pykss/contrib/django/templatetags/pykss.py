@@ -35,7 +35,7 @@ class StyleguideBlockNode(template.Node):
 
         modifier_examples = []
         for modifier in section.modifiers:
-            context.update({'modifier': modifier})
+            context.update({'modifier_class': ' %s' % modifier.class_name})
             html = self.nodelist.render(context).strip()
             modifier_examples.append({
                 'modifier': modifier,
@@ -56,11 +56,11 @@ class StyleguideBlockNode(template.Node):
 def styleguideblock(parser, token):
     """
     {% styleguideblock styleguide "1.1" %}
-        <button class="{{ modifier.class_name }}">Example Button</button>
+        <button class="{{ modifier_class }}">Example Button</button>
     {% endstyleguideblock %}
 
     {% styleguideblock styleguide "1.1" using "custom.html" %}
-        <button class="{{ modifier.class_name }}">Example Button</button>
+        <button class="{{ modifier_class }}">Example Button</button>
     {% endstyleguideblock %}
 
     """

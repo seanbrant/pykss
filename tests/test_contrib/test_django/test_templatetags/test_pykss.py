@@ -79,7 +79,7 @@ class StyleguideBlockTestCase(TestCase):
         template = Template("""
             {% load pykss %}
             {% styleguideblock styleguide "2.1.1" using "django.html" %}
-                <i class="{{ modifier.class_name }}"></i>
+                <i class="main{{ modifier_class }}"></i>
             {% endstyleguideblock %}
         """)
         context = Context({'styleguide': self.styleguide})
@@ -88,6 +88,6 @@ class StyleguideBlockTestCase(TestCase):
         self.assertEqual(results['filename'], 'buttons.css')
         self.assertEqual(results['description'], 'Your standard form button.')
         self.assertEqual(results['modifiers'][0], [':hover', 'Highlights when hovering.'])
-        self.assertEqual(results['example_html'], '<i class=""></i>')
-        self.assertEqual(results['modifier_examples'][0], [':hover', '<i class="pseudo-class-hover"></i>'])
-        self.assertEqual(results['escaped_html'], '&lt;i class=&quot;&quot;&gt;&lt;/i&gt;')
+        self.assertEqual(results['example_html'], '<i class="main"></i>')
+        self.assertEqual(results['modifier_examples'][0], [':hover', '<i class="main pseudo-class-hover"></i>'])
+        self.assertEqual(results['escaped_html'], '&lt;i class=&quot;main&quot;&gt;&lt;/i&gt;')
