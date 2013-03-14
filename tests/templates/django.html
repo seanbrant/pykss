@@ -8,11 +8,10 @@
             ["{{ modifier.name }}","{{ modifier.description }}"]{% if not forloop.last %},{% endif %}
         {% endfor %}
     ],
-    "example_html": "{{ example_html|escapejs }}",
+    "example_html": "{{ section.example|escapejs }}",
     "modifier_examples": [
-        {% for example in modifier_examples %}
-            ["{{ example.modifier.name }}","{{ example.html|escapejs }}"]{% if not forloop.last %},{% endif %}
+        {% for modifier in section.modifiers %}
+            ["{{ modifier.name }}","{{ modifier.example|escapejs }}"]{% if not forloop.last %},{% endif %}
         {% endfor %}
-    ],
-    "escaped_html": "{{ escaped_html|escapejs }}"
+    ]
 }

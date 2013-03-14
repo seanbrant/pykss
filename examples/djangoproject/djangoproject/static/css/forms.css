@@ -1,0 +1,12 @@
+/*
+Form input.
+
+.error - When form error.
+
+Example:
+    <input type="text" class="text$modifier_class" />
+
+Styleguide 2.1
+*/
+input.error {
+    border: 1px solid red; }

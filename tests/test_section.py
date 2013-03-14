@@ -16,6 +16,9 @@ Your standard form button.
 .primary  - Indicates button is the primary action.
 .smaller  - A smaller button
 
+Example:
+    <a href="button$modifier_class">Button</a>
+
 Styleguide 2.1.1.
         """
         self.section = Section(comment.strip(), 'example.css')
@@ -31,6 +34,9 @@ Styleguide 2.1.1.
 
     def test_parses_modifier_descriptions(self):
         self.assertEqual(self.section.modifiers[0].description, 'Highlights when hovering.')
+
+    def test_parses_the_example(self):
+        self.assertEqual(self.section.example, '<a href="button">Button</a>')
 
     def test_parses_the_styleguide_reference(self):
         self.assertEqual(self.section.section, '2.1.1')

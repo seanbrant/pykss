@@ -7,7 +7,6 @@ from django.utils import simplejson
 
 from mock import patch, ANY
 
-from pykss.exceptions import SectionDoesNotExist
 from pykss.parser import Parser
 
 
@@ -17,25 +16,14 @@ class StyleguideBlockTestCase(TestCase):
         css = os.path.join(settings.PROJECT_ROOT, 'tests', 'fixtures', 'css')
         self.styleguide = Parser(css)
 
-    def test_when_section_does_not_exist_and_in_debug(self):
+    def test_when_section_does_not_exist(self):
         template = Template("""
             {% load pykss %}
             {% styleguideblock styleguide "99" %}
             {% endstyleguideblock %}
         """)
         context = Context({'styleguide': self.styleguide})
-        self.assertRaises(SectionDoesNotExist, template.render, context)
-
-    def test_when_section_does_not_exist_and_not_in_debug(self):
-        with self.settings(TEMPLATE_DEBUG=False):
-            template = Template("""
-                {% load pykss %}
-                {% styleguideblock styleguide "99" %}
-                {% endstyleguideblock %}
-            """)
-            context = Context({'styleguide': self.styleguide})
-            results = template.render(context)
-            self.assertEqual(results.strip(), '')
+        self.assertEquals(template.render(context).strip(), '')
 
     @patch('pykss.contrib.django.templatetags.pykss.render_to_string')
     def test_uses_default_template(self, mock_render_to_string):
@@ -79,7 +67,7 @@ class StyleguideBlockTestCase(TestCase):
         template = Template("""
             {% load pykss %}
             {% styleguideblock styleguide "2.1.1" using "django.html" %}
-                <i class="main{{ modifier_class }}"></i>
+                <i class="main$modifier_class"></i>
             {% endstyleguideblock %}
         """)
         context = Context({'styleguide': self.styleguide})
@@ -90,4 +78,8 @@ class StyleguideBlockTestCase(TestCase):
         self.assertEqual(results['modifiers'][0], [':hover', 'Highlights when hovering.'])
         self.assertEqual(results['example_html'], '<i class="main"></i>')
         self.assertEqual(results['modifier_examples'][0], [':hover', '<i class="main pseudo-class-hover"></i>'])
-        self.assertEqual(results['escaped_html'], '&lt;i class=&quot;main&quot;&gt;&lt;/i&gt;')
+
+
+#class RenderStyleguideTestCase(TestCase):
+
+#    def test_renders_correctly(self):

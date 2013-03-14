@@ -18,20 +18,20 @@
 
     {% block styleguide_element %}
     <div class="styleguide-element">
-        {{ example_html }}
+        {{ section.example|safe }}
     </div>
     {% endblock %}
 
     {% block styleguide_modifier_elements %}
-    {% for example in modifier_examples %}
+    {% for modifier in section.modifiers %}
     <div class="styleguide-element styleguide-modifier">
-        <span class="styleguide-modifier-name">{{ example.modifier.name }}</span>
-        {{ example.html }}
+        <span class="styleguide-modifier-name">{{ modifier.name }}</span>
+        {{ modifier.example|safe }}
     </div>
     {% endfor %}
     {% endblock %}
 
     {% block styleguide_code %}
-    <pre class="styleguide-code">{{ escaped_html }}</pre>
+    <pre class="styleguide-code">{{ section.example|escape }}</pre>
     {% endblock %}
 </div>
