@@ -27,6 +27,7 @@ class StyleguideBlockTestCase(TestCase):
 
     @patch('pykss.contrib.django.templatetags.pykss.render_to_string')
     def test_uses_default_template(self, mock_render_to_string):
+        mock_render_to_string.return_value = ''
         template = Template("""
             {% load pykss %}
             {% styleguideblock styleguide "2.1.1" %}
@@ -38,6 +39,7 @@ class StyleguideBlockTestCase(TestCase):
 
     @patch('pykss.contrib.django.templatetags.pykss.render_to_string')
     def test_allows_overiding_template(self, mock_render_to_string):
+        mock_render_to_string.return_value = ''
         template = Template("""
             {% load pykss %}
             {% styleguideblock styleguide "2.1.1" using "custom.html" %}
