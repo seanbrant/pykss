@@ -9,7 +9,8 @@ MODIFIER_DESCRIPTION_SEPARATOR = ' - '
 EXAMPLE_START = 'Example:'
 REFERENCE_START = 'Styleguide'
 
-reference_re = re.compile('%s ([\d\.]+)' % REFERENCE_START)
+reference_re = re.compile(r'%s ([\d\.]+)' % REFERENCE_START)
+optional_re = re.compile(r'\[(.*)\]\?')
 
 
 class Section(object):
@@ -76,6 +77,6 @@ class Section(object):
         return self._reference
 
     def add_example(self, example):
-        self._example = example.replace('$modifier_class', '')
+        self._example = optional_re.sub('', example).replace('$modifier_class', '')
         for modifier in self._modifiers:
-            modifier.add_example(example)
+            modifier.add_example(optional_re.sub(r'\1', example))

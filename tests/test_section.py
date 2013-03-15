@@ -17,7 +17,7 @@ Your standard form button.
 .smaller  - A smaller button
 
 Example:
-    <a href="button$modifier_class">Button</a>
+    <a href="#" class="button$modifier_class">Button</a><a href="#"[ class="$modifier_class"]?>Button</a>
 
 Styleguide 2.1.1.
         """
@@ -36,7 +36,8 @@ Styleguide 2.1.1.
         self.assertEqual(self.section.modifiers[0].description, 'Highlights when hovering.')
 
     def test_parses_the_example(self):
-        self.assertEqual(self.section.example, '<a href="button">Button</a>')
+        expected = '<a href="#" class="button">Button</a><a href="#">Button</a>'
+        self.assertEqual(self.section.example, expected)
 
     def test_parses_the_styleguide_reference(self):
         self.assertEqual(self.section.section, '2.1.1')
