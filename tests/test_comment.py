@@ -19,10 +19,10 @@ class CommentMethodTestCase(unittest.TestCase):
         self.assertFalse(comment.is_multi_line_comment_end("nooooope"))
 
     def test_parses_the_single_line_comment_syntax(self):
-        self.assertEqual(comment.parse_single_line("// yuuuuup"), 'yuuuuup')
+        self.assertEqual(comment.parse_single_line("// yuuuuup"), ' yuuuuup')
 
     def test_parses_the_multi_line_comment_syntax(self):
-        self.assertEqual(comment.parse_multi_line('/* yuuuup */'), 'yuuuup')
+        self.assertEqual(comment.parse_multi_line('/* yuuuup */'), ' yuuuup')
 
 
 class CommentParserTestCase(unittest.TestCase):
@@ -35,7 +35,8 @@ class CommentParserTestCase(unittest.TestCase):
         expected = """
 This comment block has comment identifiers on every line.
 
-Fun fact: this is Kyle's favorite comment syntax!"""
+Fun fact: this is Kyle's favorite comment syntax!
+        """
         self.assertTrue(expected.strip() in self.comments)
 
     def test_finds_block_style_comment_styles(self):
@@ -63,3 +64,12 @@ It has stars at the begining of every line.
     def test_handles_indented_comments(self):
         self.assertTrue('Indented single-line comment.' in self.comments)
         self.assertTrue('Indented block comment.' in self.comments)
+
+    def test_handles_indented_example(self):
+        expected = """
+This comment has a indented example
+<div>
+    <div></div>
+</div>
+        """
+        self.assertTrue(expected.strip() in self.comments)

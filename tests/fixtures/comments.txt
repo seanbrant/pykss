@@ -31,3 +31,12 @@ Indented comments:
     // Indented single-line comment.
 
     /* Indented block comment. */
+
+
+Comment with example:
+
+/* This comment has a indented example
+ * <div>
+ *     <div></div>
+ * </div>
+ */

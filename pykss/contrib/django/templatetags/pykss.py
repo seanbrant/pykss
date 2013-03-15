@@ -1,6 +1,5 @@
 from django import template
 from django.template.loader import render_to_string
-from django.utils.html import strip_spaces_between_tags
 
 
 register = template.Library()
@@ -64,7 +63,7 @@ class BaseStyleguideNode(template.Node):
         for section in sections:
             context.update({'section': section})
             html = render_to_string(template_name, context)
-            output.append(strip_spaces_between_tags(html))
+            output.append(html)
             context.pop()
 
         return ''.join(output)
