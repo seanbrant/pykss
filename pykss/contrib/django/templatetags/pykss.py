@@ -50,8 +50,8 @@ class BaseStyleguideNode(template.Node):
         reference = self.reference.resolve(context)
         template_name = self.template_name.resolve(context)
 
-        sections = [sec for ref, sec in styleguide.sections.iteritems()
-                    if ref.startswith(reference)]
+        sections = sorted([sec for ref, sec in styleguide.sections.iteritems()
+                    if ref.startswith(reference)], key=lambda s: s.section)
 
         if self.nodelist:
             example = self.nodelist.render(context).strip()
