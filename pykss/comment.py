@@ -47,7 +47,7 @@ def normalize(lines):
         if line:
             indents.append(len(match.group()))
 
-    indent = min(indents)
+    indent = min(indents) if indents else 0
 
     return '\n'.join([line[indent:] for line in cleaned]).strip()
 
