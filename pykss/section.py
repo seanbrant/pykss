@@ -28,6 +28,7 @@ class Section(object):
         in_example = False
 
         for line in self.comment.splitlines():
+            print line
             if line.startswith(CLASS_MODIFIER) or line.startswith(PSEUDO_CLASS_MODIFIER):
                 try:
                     modifier, description = line.split(MODIFIER_DESCRIPTION_SEPARATOR)
@@ -41,7 +42,9 @@ class Section(object):
 
             elif line.startswith(REFERENCE_START):
                 in_example = False
-                self._reference = reference_re.match(line).groups()[0].rstrip('.')
+                match = reference_re.match(line)
+                if match:
+                    self._reference = match.groups()[0].rstrip('.')
 
             elif in_example is True:
                 self._example_lines.append(line)
