@@ -80,8 +80,3 @@ class StyleguideBlockTestCase(TestCase):
         self.assertEqual(results['modifiers'][0], [':hover', 'Highlights when hovering.'])
         self.assertEqual(results['example_html'], '<i class="main"></i>')
         self.assertEqual(results['modifier_examples'][0], [':hover', '<i class="main pseudo-class-hover"></i>'])
-
-
-#class RenderStyleguideTestCase(TestCase):
-
-#    def test_renders_correctly(self):
