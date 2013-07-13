@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 import unittest
 
@@ -73,3 +75,6 @@ This comment has a indented example
 </div>
         """
         self.assertTrue(expected.strip() in self.comments)
+
+    def test_handles_unicode_in_comments(self):
+        self.assertTrue(u'Hello, 世界' in self.comments)

@@ -40,3 +40,9 @@ Comment with example:
  *     <div></div>
  * </div>
  */
+
+
+Comment with non ASCII:
+
+/* Hello, 世界
+ */
