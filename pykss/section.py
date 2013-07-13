@@ -28,7 +28,6 @@ class Section(object):
         in_example = False
 
         for line in self.comment.splitlines():
-            print line
             if line.startswith(CLASS_MODIFIER) or line.startswith(PSEUDO_CLASS_MODIFIER):
                 try:
                     modifier, description = line.split(MODIFIER_DESCRIPTION_SEPARATOR)
