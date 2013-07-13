@@ -1,9 +1,9 @@
+import json
 import os
 
 from django.conf import settings
 from django.template import Context, Template, TemplateSyntaxError
 from django.test import TestCase
-from django.utils import simplejson
 
 from mock import patch, ANY
 
@@ -73,7 +73,7 @@ class StyleguideBlockTestCase(TestCase):
             {% endstyleguideblock %}
         """)
         context = Context({'styleguide': self.styleguide})
-        results = simplejson.loads(template.render(context))
+        results = json.loads(template.render(context))
         self.assertEqual(results['section'], '2.1.1')
         self.assertEqual(results['filename'], 'buttons.css')
         self.assertEqual(results['description'], 'Your standard form button.')
