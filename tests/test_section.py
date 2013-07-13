@@ -23,23 +23,23 @@ Styleguide 2.1.1.
         """
         self.section = Section(comment.strip(), 'example.css')
 
-    def stest_parses_the_description(self):
+    def test_parses_the_description(self):
         self.assertEqual(self.section.description, '# Form Button\n\nYour standard form button.')
 
-    def stest_parses_the_modifiers(self):
+    def test_parses_the_modifiers(self):
         self.assertEqual(len(self.section.modifiers), 4)
 
-    def stest_parses_modifier_names(self):
+    def test_parses_modifier_names(self):
         self.assertEqual(self.section.modifiers[0].name, ':hover')
 
-    def stest_parses_modifier_descriptions(self):
+    def test_parses_modifier_descriptions(self):
         self.assertEqual(self.section.modifiers[0].description, 'Highlights when hovering.')
 
-    def stest_parses_the_example(self):
+    def test_parses_the_example(self):
         expected = '<a href="#" class="button">Button</a><a href="#">Button</a>'
         self.assertEqual(self.section.example, expected)
 
-    def stest_parses_the_styleguide_reference(self):
+    def test_parses_the_styleguide_reference(self):
         self.assertEqual(self.section.section, '2.1.1')
 
     def test_handles_when_no_reference(self):
