@@ -8,7 +8,8 @@ class StyleguideMixin(object):
 
     def get_styleguide(self):
         dirs = getattr(settings, 'PYKSS_DIRS', [])
-        return pykss.Parser(*dirs)
+        exts = getattr(settings, 'PYKSS_EXTENSIONS', None)
+        return pykss.Parser(*dirs, extensions=exts)
 
     def get_context_data(self, **kwargs):
         context = super(StyleguideMixin, self).get_context_data(**kwargs)

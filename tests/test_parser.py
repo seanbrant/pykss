@@ -12,6 +12,7 @@ class ParseTestCase(unittest.TestCase):
         self.less = pykss.Parser(os.path.join(fixtures, 'less'))
         self.sass = pykss.Parser(os.path.join(fixtures, 'sass'))
         self.css = pykss.Parser(os.path.join(fixtures, 'css'))
+        self.na = pykss.Parser(os.path.join(fixtures, 'scss'), extensions=['.css'])
         self.multiple = pykss.Parser(os.path.join(fixtures, 'scss'), os.path.join(fixtures, 'less'))
 
     def test_parses_kss_comments_in_scss(self):
@@ -46,3 +47,6 @@ class ParseTestCase(unittest.TestCase):
 
     def test_parse_multiple_paths(self):
         self.assertEqual(len(self.multiple.sections), 6)
+
+    def test_parse_ext_mismatch(self):
+        self.assertDictEqual(self.na.sections, {})

@@ -7,18 +7,17 @@ from pykss.section import Section
 
 class Parser(object):
 
-    def __init__(self, *paths):
+    def __init__(self, *paths, **kwargs):
         self.paths = paths
+        extensions = kwargs.pop('extensions', None)
+        if extensions is None:
+            extensions = ['.less', '.css', '.sass', '.scss']
+        self.extensions = extensions
 
     def parse(self):
         sections = {}
 
-        filenames = [os.path.join(subpath, filename)
-            for path in self.paths
-            for subpath, dirs, files in os.walk(path)
-            for filename in files]
-
-        for filename in filenames:
+        for filename in self.find_files():
             parser = CommentParser(filename)
             for block in parser.blocks:
                 section = Section(block, os.path.basename(filename))
@@ -26,6 +25,15 @@ class Parser(object):
                     sections[section.section] = section
 
         return sections
+
+    def find_files(self):
+        '''Find files in `paths` which match valid extensions'''
+        for path in self.paths:
+            for subpath, dirs, files in os.walk(path):
+                for filename in files:
+                    (name, ext) = os.path.splitext(filename)
+                    if ext in self.extensions:
+                        yield os.path.join(subpath, filename)
 
     @property
     def sections(self):
