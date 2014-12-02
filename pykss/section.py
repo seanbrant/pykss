@@ -11,6 +11,7 @@ REFERENCE_START = 'Styleguide'
 
 reference_re = re.compile(r'%s ([\d\.]+)' % REFERENCE_START)
 optional_re = re.compile(r'\[(.*)\]\?')
+multiline_modifier_re = re.compile(r'^\s+(\w.*)')
 
 
 class Section(object):
@@ -26,9 +27,11 @@ class Section(object):
         self._reference = None
 
         in_example = False
+        in_modifiers = False
 
         for line in self.comment.splitlines():
             if line.startswith(CLASS_MODIFIER) or line.startswith(PSEUDO_CLASS_MODIFIER):
+                in_modifiers = True
                 try:
                     modifier, description = line.split(MODIFIER_DESCRIPTION_SEPARATOR)
                 except ValueError:
@@ -36,11 +39,20 @@ class Section(object):
                 else:
                     self._modifiers.append(Modifier(modifier.strip(), description.strip()))
 
+            elif in_modifiers and multiline_modifier_re.match(line):
+                match = multiline_modifier_re.match(line)
+                if match:
+                    description = match.groups()[0]
+                    last_modifier = self._modifiers[-1]
+                    last_modifier.description += ' {0}'.format(description)
+
             elif line.startswith(EXAMPLE_START):
                 in_example = True
+                in_modifiers = False
 
             elif line.startswith(REFERENCE_START):
                 in_example = False
+                in_modifiers = False
                 match = reference_re.match(line)
                 if match:
                     self._reference = match.groups()[0].rstrip('.')
@@ -49,6 +61,7 @@ class Section(object):
                 self._example_lines.append(line)
 
             else:
+                in_modifiers = False
                 self._description_lines.append(line)
 
         self._description = '\n'.join(self._description_lines).strip()
