@@ -50,7 +50,7 @@ def normalize(lines):
 
     indent = min(indents) if indents else 0
 
-    return '\n'.join([line[indent:] for line in cleaned]).strip()
+    return '\n'.join([l[indent:] for l in cleaned]).strip()
 
 
 class CommentParser(object):
