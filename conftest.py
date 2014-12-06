@@ -1,4 +1,5 @@
 import os
+import django
 from django.conf import settings
 
 
@@ -21,3 +22,6 @@ def pytest_configure(config):
             TEMPLATE_DEBUG=True,
             TEMPLATE_DIRS=[os.path.join(PROJECT_ROOT, 'tests', 'templates')],
         )
+
+        if hasattr(django, 'setup'):
+            django.setup()
