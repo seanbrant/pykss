@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pykss',
-    version='0.4',
+    version='0.5',
     description='Python implementation of KSS',
     long_description=open('README.rst').read(),
     author='Sean Brant',
@@ -25,7 +25,7 @@ setup(
     test_suite='runtests.runtests',
     extras_require={
         'tests': [
-            'Django>=1.5',
+            'Django>=1.6',
             'flake8',
             'mock',
             'pytest',
