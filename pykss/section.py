@@ -9,7 +9,7 @@ MODIFIER_DESCRIPTION_SEPARATOR = ' - '
 EXAMPLE_START = 'Example:'
 REFERENCE_START = 'Styleguide'
 
-reference_re = re.compile(r'%s ([\d\.]+)' % REFERENCE_START)
+reference_re = re.compile(r'%s ([\w\.]+)' % REFERENCE_START)
 optional_re = re.compile(r'\[(.*)\]\?')
 multiline_modifier_re = re.compile(r'^\s+(\w.*)')
 
