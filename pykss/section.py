@@ -86,12 +86,19 @@ class Section(object):
         return self._example
 
     @property
+    def example_source(self):
+        if not hasattr(self, '_modifiers'):
+            self.parse()
+        return self._example_source
+
+    @property
     def section(self):
         if not hasattr(self, '_reference'):
             self.parse()
         return self._reference
 
     def add_example(self, example):
-        self._example = optional_re.sub('', example).replace('$modifier_class', '')
+        self._example_source = optional_re.sub('', example)
+        self._example = self._example_source.replace('$modifier_class', '')
         for modifier in self._modifiers:
             modifier.add_example(optional_re.sub(r'\1', example))
