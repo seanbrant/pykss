@@ -1,2 +1,2 @@
-Django==1.5
+Django==2.2.24
 https://github.com/seanbrant/pykss.git
